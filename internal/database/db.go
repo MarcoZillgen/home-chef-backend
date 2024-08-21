@@ -2,7 +2,7 @@ package database
 
 import (
 	"fmt"
-	"os"
+	"log"
 
 	"MarcoZillgen/homeChef/internal/storage"
 
@@ -13,8 +13,8 @@ import (
 )
 
 func InitDB() (*gorm.DB, error) {
-	
-	iferr := godotenv.Load("../../.env");err != nil {
+
+	if err := godotenv.Load("../../.env"); err != nil {
 		log.Fatalf("Error loading .env file: %v", err)
 	}
 
