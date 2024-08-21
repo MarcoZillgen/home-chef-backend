@@ -3,20 +3,22 @@ package database
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"MarcoZillgen/homeChef/internal/storage"
 
-	"joho/godotenv"
-
+	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 func InitDB() (*gorm.DB, error) {
 
-	if err := godotenv.Load("../../.env"); err != nil {
+	if err := godotenv.Load(); err != nil {
 		log.Fatalf("Error loading .env file: %v", err)
 	}
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
 
 	// dsn := "host=localhost user=server password=password dbname=home_chef port=5432 sslmode=disable"
 	dsn := fmt.Sprintf("host=localhost user=%s password=%s dbname=home_chef port=5432 sslmode=disable", user, password)
